@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
@@ -23,13 +24,13 @@ namespace Vidly.Controllers
         public ViewResult Index()
         {
             // var customers = GetCustomers();
-            var customers = _context.Customers;   // this instruction will not query the db , we neet to use an iterator in the ViewPage or to use toList() method 
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();   // this instruction will not query the db , we neet to use an iterator in the ViewPage or to use toList() method 
             return View(customers);
         }
 
         public ActionResult Details(int id)
         {
-            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
