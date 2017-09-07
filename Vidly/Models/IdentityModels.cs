@@ -22,7 +22,9 @@ namespace Vidly.Models
     {
         //Qaund on fait la commande de migration, entityframework entre dans cette classe et cherche tous les Dbset pour créer les tables et faires les mises à jour
 
-        public DbSet<Customer> Customers { get; set; }   // DbSet Customer est la représentation 
+        public DbSet<Customer> Customers { get; set; }   // DbSet Customer est la représentation de la table Customers 
+        public DbSet<Movie> Movies { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
