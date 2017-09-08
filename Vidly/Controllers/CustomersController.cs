@@ -24,6 +24,9 @@ namespace Vidly.Controllers
 
         public ActionResult New()
         {
+            // Remarque : l'action New permet d'ajouter un nouveau modèle mais elle permet aussi de le modifier
+            //
+            var membershipTypes = _context.MemebershipTypes.ToList();
 
             return View();
         }
