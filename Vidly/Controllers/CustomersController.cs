@@ -21,6 +21,12 @@ namespace Vidly.Controllers
         {
             _context.Dispose();
         }
+
+        public ActionResult New()
+        {
+
+            return View();
+        }
         public ViewResult Index()
         {
             // var customers = GetCustomers();
@@ -38,6 +44,9 @@ namespace Vidly.Controllers
 
             return View(customer);
         }
+
+
+        
 
         private IEnumerable<Customer> GetCustomers()
         {
