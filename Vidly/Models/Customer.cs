@@ -13,6 +13,7 @@ namespace Vidly.Models
         [Required] //data annotation 
         [StringLength(255)]
         public string Name { get; set; }
+
         public bool IsSubscribedToNewsletter { get; set; }
         
         [Display(Name="Date of Birth")]
@@ -22,6 +23,7 @@ namespace Vidly.Models
         public MembershipType MembershipType { get; set; }
 
         //Pour optimisation on peut rajouter une propriété de foreignkey 
+        [Display(Name="Membership Type")]
         public byte MembershipTypeId { get; set; }
 
     }
