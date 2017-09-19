@@ -57,6 +57,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -97,7 +98,7 @@ namespace Vidly.Controllers
         {
             var viewModel = new MovieFormViewModel
             {
-                Movie = new Movie(),
+                Movie = new Movie(), // Can be replaced by Pure viewmodel 
                Genres = _context.Genres
             };
 

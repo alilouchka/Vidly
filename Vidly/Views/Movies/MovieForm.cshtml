@@ -46,10 +46,18 @@
         @Html.TextBoxFor(m=>m.Movie.NumberInStock,new {@class="form-control"})
         @Html.ValidationMessageFor(m => m.Movie.NumberInStock)
     </div>
+    @Html.Hidden("Movie.Id", (Model.Movie != null) ? Model.Movie.Id : 0 ) //L'inconvenient est le nom du paramètre qu'il faut changer ici si je renomme ma variable Id
+                                                                          //La solution: utiliser les pure viewModel ( réutiliser tous les parametres du modèle
 
     @Html.HiddenFor(m => m.Movie.Id)
+    @Html.AntiForgeryToken()
     <button class="btn btn-primary">Save</button>
 
 
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
