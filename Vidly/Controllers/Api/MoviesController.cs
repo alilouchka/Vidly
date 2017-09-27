@@ -69,7 +69,7 @@ namespace Vidly.Controllers.Api
             if(movieInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            Mapper.Map(movieDto,movieInDb);
+            Mapper.Map<MovieDto,Movie>( movieDto, movieInDb);
 
             _context.SaveChanges();
 

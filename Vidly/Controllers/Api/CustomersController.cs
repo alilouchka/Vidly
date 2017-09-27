@@ -38,7 +38,7 @@ namespace Vidly.Controllers.Api
 
         //POST /api/customers
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if(!ModelState.IsValid)
                 throw  new HttpResponseException(HttpStatusCode.BadRequest);
@@ -48,12 +48,14 @@ namespace Vidly.Controllers.Api
            // après la création, Un Id sera attribué 
             customerDto.Id = customer.Id;
 
-            return customerDto;
+            return Created(new Uri(Request.RequestUri+"/"+customer.Id), customerDto);
+
+           
         }
         
         //PUT /api/customers/1
         [HttpPut]
-        public void UpdateCustomer(int id, CustomerDto customerDto)
+        public IHttpActionResult  UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -71,10 +73,12 @@ namespace Vidly.Controllers.Api
             // We can use a tool like auto mapper to avoid this lines of updating 
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         //DELETE /api/customers/1
-        public void DeleteCustomer(int id)
+        public IHttpActionResult DeleteCustomer(int id)
         {
             var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == id);
 
@@ -83,6 +87,8 @@ namespace Vidly.Controllers.Api
 
             _context.Customers.Remove(customerInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
     }
 }
