@@ -16,12 +16,8 @@
 }
 
 <h2>Customers</h2>
-@if (!Model.Any())
-{
-    <p>We don't have any customers yet.</p>
-}
-else
-{
+
+
     <table id="customers" class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -31,28 +27,59 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>  
-                    <td>@customer.MembershipType.Name</td>
-                    <td>
-                        <button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button>
-                    </td>
-                </tr>
-            }
+      
         </tbody>
     </table>
-}
+
 
 @section scripts
 {
     <script>
         $(document).ready(function() {
-            $("#customers .js-delete").on("click",
-                function() {
-                    var
-                        button = $(this); // référence vers le bouton pour le supprimer lui et ses parents (navigate in DOM tree and delete the elements)
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: "" 
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, customer) {
+                            return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "name"
+                       
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-customer-id="+data+"> Delete </button>";
+                        }
+                    }
+
+
+        //            {
+        //                data: "name",
+        //                render: function(data, type, customer) {
+        //                    return "<a href='/customers/edit/" + customer.id + "'>" + customer.name + "</a>";
+        //                }
+        //            },
+        //            {
+        //                data: "name"
+        //            },
+        //            {
+        //                data: "id",
+        //                render: function (data) {
+        //                    return "<button class='btn-link js-delete' data-customer-id="+data+"> Delete </button>";
+        //                }
+        //}
+                ]
+
+            });
+            $("#customers").on("click",".js-delete",function() {
+                    var button = $(this); // référence vers le bouton pour le supprimer lui et ses parents (navigate in DOM tree and delete the elements)
                     //Remarque: $(this) prend automatiquement le conteneur du callback function 
 
                     bootbox.confirm("Are you sure you want to delete this customer?",

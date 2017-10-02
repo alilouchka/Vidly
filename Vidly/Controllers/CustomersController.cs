@@ -38,8 +38,8 @@ namespace Vidly.Controllers
         public ViewResult Index()
         {
             // var customers = GetCustomers();
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();   // this instruction will not query the db , we neet to use an iterator in the ViewPage or to use toList() method 
-            return View(customers);
+         //   var customers = _context.Customers.Include(c => c.MembershipType).ToList();   // this instruction will not query the db , we neet to use an iterator in the ViewPage or to use toList() method 
+            return View();
         }
 
         public ActionResult Details(int id)
