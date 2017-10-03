@@ -17,6 +17,6 @@ namespace Vidly.Controllers.Dtos
         public bool IsSubscribedToNewsletter { get; set; }
         public DateTime? Birthdate { get; set; }
         public byte MembershipTypeId { get; set; }
-        public MemebershipTypeDto MemebershipTypeDto { get; set; }
+        public MemebershipTypeDto MembershipType { get; set; } // Il faut exactement avoir le meme nom du modèle ('MembershipType')
     }
 }

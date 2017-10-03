@@ -21,5 +21,8 @@ namespace Vidly.Controllers.Dtos
         public short NumberInStock { get; set; }
        
         public byte GenreId { get; set; }
+
+        public GenreDto Genre { get; set; }
+
     }
 }
