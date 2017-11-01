@@ -24,5 +24,7 @@ namespace Vidly.Controllers.Dtos
 
         public GenreDto Genre { get; set; }
 
+        public short NumberAvailable { get; set; }
+
     }
 }

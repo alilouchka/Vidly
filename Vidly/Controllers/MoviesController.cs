@@ -7,6 +7,7 @@ using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
+    [AllowAnonymous]
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
@@ -83,6 +84,7 @@ namespace Vidly.Controllers
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
                 movieInDb.GenreId = movie.GenreId;
+                movieInDb.NumberAvailable = movie.NumberInStock;
 
 
             }
