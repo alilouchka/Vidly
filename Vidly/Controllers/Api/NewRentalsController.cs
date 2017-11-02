@@ -17,6 +17,13 @@ namespace Vidly.Controllers.Api
             _dbContext = new ApplicationDbContext();
         }
 
+     
+        // GET  /api/rentals 
+        public IEnumerable<Rental> GetRentals()
+        {
+            return _dbContext.Rentals.ToList();
+        }
+
         [HttpPost]
         public IHttpActionResult CreateNewRentals(NewRentalDto newRentalDto)
         {
