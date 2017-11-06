@@ -20,11 +20,16 @@ namespace Vidly.Controllers.Api
             _context = new ApplicationDbContext();
         }
         // GET /api/customers
-        public IEnumerable<CustomerDto> GetCustomers()
-        {
-        
-            return _context.Customers
-                .Include(c=> c.MembershipType)
+        public IEnumerable<CustomerDto> GetCustomers( string query = null) // paramètre optionnel quand je le mets à null
+        {                                                                  // le parametre query est utilisé pour le typeahead twitter 
+
+            var customersQuery = _context.Customers.Include(c => c.MembershipType);
+            if(!String.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            return customersQuery
                 .ToList()
                 .Select(Mapper.Map<Customer,CustomerDto>);
             

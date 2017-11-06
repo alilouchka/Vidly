@@ -25,11 +25,15 @@ namespace Vidly.Controllers.Api
         }
 
         // GET  /api/movies 
-        public IEnumerable<MovieDto> GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            return _context.Movies
-                .Include(m=>m.Genre)
-                .ToList().Select(Mapper.Map<Movie, MovieDto>);
+            var queryMovies = _context.Movies.Include(m => m.Genre).Where(m=> m.NumberAvailable > 0);
+            if (!String.IsNullOrWhiteSpace(query))
+                queryMovies = queryMovies.Where(m => m.Name.Contains(query));
+
+            var moviesDto = queryMovies.ToList().Select(Mapper.Map<Movie, MovieDto>);
+            return Ok(moviesDto);
+                
         }
 
         //GET /api/movies/1
